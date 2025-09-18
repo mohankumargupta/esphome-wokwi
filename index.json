@@ -1,4 +1,12 @@
 [
-    "hello world",
-    "pictureframe"
+    {
+        "name": "helloworld",
+        "title": "Hello World",
+        "description": "ESP32 hello world with ESPHome"
+    },
+    {
+        "name": "pictureframe",
+        "title": "Picture Frame",
+        "description": "ESPHome on ILI9431 display"
+    }
 ]
