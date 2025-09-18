@@ -21,8 +21,13 @@
       <p class="mt-2 text-sm text-zinc-500">
         Source code available at:
         <a target="_blank" href="https://github.com/mohankumargupta/wokwi-vscode-examples"
-          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta</a>
+          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta/wokwi-vscode-examples</a>
       </p>
+      <p class="mt-2 text-sm text-zinc-500">
+        Source code for this sad website:
+        <a target="_blank" href="https://github.com/mohankumargupta/esphome-wokwi"
+          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta/esphome-wokwi</a>
+      </p>      
     </div>
 
     <!-- Alpine Component List -->
@@ -39,14 +44,15 @@
             <div class="flex-1 min-w-0">
               <p>
                 <span class="text-base font-medium text-zinc-100 truncate" x-text="item.title"></span>
-                <span><img style="display: inline;" width="16" class="ml-2 brightness-0 invert" src="/index.svg" />
-</span>
+                
               </p>
               <p class="text-sm text-zinc-400 truncate" x-text="item.description"></p>
+              <p><a target="_blank" :href="`https://github.com/mohankumargupta/wokwi-vscode-examples/tree/main/${item.name}`"><span><img width="16" class="inline brightness-0 invert" src="/index.svg" /><span class="text-sky-900">Source Code</span></a>
+</span></p>
             </div>
             <!-- Action Link -->
             <div class="shrink-0">
-              <a :href="`http://google.com/${item.name}`"
+              <a target="_blank" :href="`https://wokwi.com/experimental/viewer?diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${item.name}%2Fdiagram.json&firmware=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${item.name}%2Ffirmware%2Ffirmware.factory.bin`"
                 class="inline-flex items-center text-sm font-medium text-zinc-300 hover:text-white transition-colors">
                 <span>Try It</span>
                 <img style="display: inline;" width="16" class="ml-2 brightness-0 invert" src="/index.svg" />
