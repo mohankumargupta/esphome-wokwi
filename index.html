@@ -1,60 +1,62 @@
 <!doctype html>
 <html>
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
-<body class="flex w-full">
-  <main>
-    <h1 class="text-3xl font-bold justify-center">
-      Esphome on Wokwi
-    </h1>
+<body class="antialiased font-sans bg-zinc-950 text-zinc-300">
 
-    <p>
-      Here are some working projects you can test on Wokwi Experimental Viewer.
-    </p>
-    <p>
-      The source code for all esphome projects here: <a target="_blank"
-        href="https://github.com/mohankumargupta/wokwi-vscode-examples">github link</a>
-    </p>
-
-
-    <div x-data="{ items: [] }" x-init="items = await (await fetch('/index.json')).json()">
-      <template x-for="item in items" :key="item">
-        <!---->
-        <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-          <li class="pb-3 sm:pb-4">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
-              <div class="shrink-0">
-                <img class="w-8 h-8 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png"
-                  alt="">
-              </div>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                  <div x-text="item.title"></div>
-                </p>
-                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                  <div x-text="item.description"></div>
-                </p>
-              </div>
-              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                <a :href="`http://google.com/${item.name}`">Try<span>   <img style="display: inline;" width="20" src="/index.svg" /></span></a>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-      </template>
+  <main class="max-w-3xl mx-auto px-4 py-16 sm:py-24">
+    <!-- Header -->
+    <div class="text-center">
+      <h1 class="text-4xl font-semibold tracking-tight text-zinc-100 sm:text-5xl">
+        Esphome on Wokwi
+      </h1>
+      <p class="mt-4 text-lg text-zinc-400">
+        Here are some working projects you can test on Wokwi Experimental Viewer.
+      </p>
+      <p class="mt-2 text-sm text-zinc-500">
+        Source code available at:
+        <a target="_blank" href="https://github.com/mohankumargupta/wokwi-vscode-examples"
+          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta</a>
+      </p>
     </div>
 
-
-
+    <!-- Alpine Component List -->
+    <div x-data="{ items: [] }" x-init="items = await (await fetch('/index.json')).json()" class="mt-16">
+      <div class="space-y-4">
+        <template x-for="item in items" :key="item.name">
+          <!-- List Item -->
+          <div class="flex items-center space-x-4 p-4 border-b border-zinc-800 hover:bg-zinc-900 rounded-lg transition-colors duration-150">
+            <!-- Icon -->
+            <div class="shrink-0 hidden sm:block">
+              <img class="w-10 h-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" alt="">
+            </div>
+            <!-- Text Content -->
+            <div class="flex-1 min-w-0">
+              <p>
+                <span class="text-base font-medium text-zinc-100 truncate" x-text="item.title"></span>
+                <span><img style="display: inline;" width="16" class="ml-2 brightness-0 invert" src="/index.svg" />
+</span>
+              </p>
+              <p class="text-sm text-zinc-400 truncate" x-text="item.description"></p>
+            </div>
+            <!-- Action Link -->
+            <div class="shrink-0">
+              <a :href="`http://google.com/${item.name}`"
+                class="inline-flex items-center text-sm font-medium text-zinc-300 hover:text-white transition-colors">
+                <span>Try It</span>
+                <img style="display: inline;" width="16" class="ml-2 brightness-0 invert" src="/index.svg" />
+              </a>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
   </main>
 
 </body>
-
 </html>
