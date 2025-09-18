@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+  </head>
+  <body class="flex w-full">
+    <main>
+      <h1 class="text-3xl font-bold justify-center">
+        Esphome on Wokwi
+      </h1>
+<p>
+  <img width="20" src="/index.svg"/>
+</p>
+<p>
+  Here are some working projects you can test on Wokwi Experimental Viewer. 
+</p>
+<p>
+  The source code for all esphome projects here: <a target="_blank" href="https://github.com/mohankumargupta/wokwi-vscode-examples">github link</a>
+</p>
+
+
+<div x-data="{ items: [] }" x-init="items = await (await fetch('/index.json')).json()">
+    <template x-for="item in items" :key="item">
+        <div x-text="item"></div>
+    </template>
+</div>
+
+<ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+   <li class="pb-3 sm:pb-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+         <div class="shrink-0">
+            <img class="w-8 h-8 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" alt="">
+         </div>
+         <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+               Neil Sims
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+               email@flowbite.com
+            </p>
+         </div>
+         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            $320
+         </div>
+      </div>
+   </li>
+</ul>
+
+
+    </main>
+
+  </body>
+</html>
