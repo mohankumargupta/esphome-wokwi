@@ -112,6 +112,7 @@
 </div>
 
 <div id="esphomecode" class="mt-8"></div>
+<div id="sourcecode" class="mt-8"><a class="hidden" href=""></a></div>
 
 <div class="mt-8">
     <div class="secondary-page-title">How to install ESPHome</div>
@@ -145,6 +146,9 @@
             console.log(html);
             const foo = window.document.getElementById('esphomecode');
             foo.innerHTML = html;
+
+            const githublink = `https://github.com/mohankumargupta/wokwi-vscode-examples/${project}`;
+            window.document.querySelector("#sourcecode").attributes['href'] = githublink;
           });
 
       }  
