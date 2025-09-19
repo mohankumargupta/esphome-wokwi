@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<body class="antialiased font-sans bg-zinc-950 text-zinc-300">
+
+  <main class="max-w-3xl mx-auto px-4 py-16 sm:py-24">
+    <!-- Header -->
+    <div class="text-center">
+      <h1 class="text-4xl font-semibold tracking-tight text-zinc-100 sm:text-5xl">
+        Esphome on Wokwi
+      </h1>
+      <p class="mt-4 text-lg text-zinc-400">
+        Here are some working projects you can test on Wokwi Experimental Viewer.
+      </p>
+      <p class="mt-2 text-sm text-zinc-500">
+        Source code available at:
+        <a target="_blank" href="https://github.com/mohankumargupta/wokwi-vscode-examples"
+          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta/wokwi-vscode-examples</a>
+      </p>
+      <p class="mt-2 text-sm text-zinc-500">
+        Source code for this sad website:
+        <a target="_blank" href="https://github.com/mohankumargupta/esphome-wokwi"
+          class="font-medium text-zinc-300 hover:text-white transition-colors">github.com/mohankumargupta/esphome-wokwi</a>
+      </p>      
+    </div>
+
+    <!-- Alpine Component List -->
+    <div x-data="{ items: [] }" x-init="items = await (await fetch('/esphome-wokwi/index.json')).json()" class="mt-16">
+      <div class="space-y-4">
+        <template x-for="item in items" :key="item.name">
+          <!-- List Item -->
+          <div class="flex items-center space-x-4 p-4 border-b border-zinc-800 hover:bg-zinc-900 rounded-lg transition-colors duration-150">
+            <!-- Icon -->
+            <div class="shrink-0 hidden sm:block">
+              <img class="w-10 h-10 rounded-full" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/1x1.png" alt="">
+            </div>
+            <!-- Text Content -->
+            <div class="flex-1 min-w-0">
+              <p>
+                <span class="text-base font-medium text-zinc-100 truncate" x-text="item.title"></span>
+                
+              </p>
+              <p class="text-sm text-zinc-400 truncate" x-text="item.description"></p>
+              <p><a target="_blank" :href="`https://github.com/mohankumargupta/wokwi-vscode-examples/tree/main/${item.name}`"><span><img width="16" class="inline brightness-0 invert" src="/esphome-wokwi/index.svg" /><span class="text-sky-900">Source Code</span></a>
+</span></p>
+            </div>
+            <!-- Action Link -->
+            <div class="shrink-0">
+              <a target="_blank" :href="`https://wokwi.com/experimental/viewer?diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${item.name}%2Fdiagram.json&firmware=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${item.name}%2Ffirmware%2Ffirmware.factory.bin`"
+                class="inline-flex items-center text-sm font-medium text-zinc-300 hover:text-white transition-colors">
+                <span>Try It</span>
+                <img style="display: inline;" width="16" class="ml-2 brightness-0 invert" src="/index.svg" />
+              </a>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
