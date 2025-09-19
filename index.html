@@ -7,7 +7,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="//unpkg.com/alpinejs" defer></script>
         <script defer>
-
+   
         </script>
         <style type="text/tailwindcss">
   @layer components {
@@ -127,12 +127,12 @@
 
       const foo = document.getElementById('esphomecode')
 
-      function clicked(project) {
+      export function clicked(project) {
         const wokwi_url = `https://wokwi.com/experimental/viewer?diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${project}%2Fdiagram.json&firmware=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${project}%2Ffirmware%2Ffirmware.factory.bin`;
         window.open(wokwi_url, target="_blank");
         console.log(project);
 
-      }      
+      }  
 
     </script>
     </body>
