@@ -125,17 +125,17 @@
     <script type="module">
       import { codeToHtml } from 'https://esm.sh/shiki@3.0.0'
 
-      const foo = document.getElementById('esphomecode')
-
-      window.clicked =  function (project) {
+      window.clicked =  async function (project) {
         const wokwi_url = `https://wokwi.com/experimental/viewer?diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${project}%2Fdiagram.json&firmware=https%3A%2F%2Fraw.githubusercontent.com%2Fmohankumargupta%2Fwokwi-vscode-examples%2Frefs%2Fheads%2Fmain%2F${project}%2Ffirmware%2Ffirmware.factory.bin`;
         window.open(wokwi_url, "_blank");
-        console.log(project);
-
         fetch(`https://raw.githubusercontent.com/mohankumargupta/wokwi-vscode-examples/refs/heads/main/${project}/${project}.yaml`).then((data) => {
           console.log(data);
         });
-
+        const foo = document.getElementById('esphomecode')
+        foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {
+          lang: 'yaml',
+          theme: 'github-light'
+        });
       }  
 
     </script>
