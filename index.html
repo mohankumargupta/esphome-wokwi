@@ -132,7 +132,7 @@
           .then(response => response.text())
           .then(data =>  {
           console.log(data);
-        const foo = document.getElementById('esphomecode')
+        
         return codeToHtml('console.log("Hi, Shiki on CDN :)")', {
           lang: 'yaml',
           theme: 'github-light'
@@ -140,6 +140,8 @@
           })
           .then(html => {
             console.log(html);
+            const foo = window.document.getElementById('esphomecode');
+            foo.innerHTML = html;
           });
 
       }  
