@@ -7,7 +7,6 @@
         <title>ESPHome Wokwi</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="//unpkg.com/alpinejs" defer></script>
-        <script src="/esphome-wokwi/index.js"></script>
         <style type="text/tailwindcss">
   @layer components {
     .badge-new {
@@ -90,11 +89,11 @@
        
         <!-- Example repositories section -->
         
-            <div class="mt-0">
-                <p class="opacity-70 ">Try.<br> Opens Wokwi Experimental Viewer in New Tab<br>also opens ESPHOME YAML here. </p>
-                
+            <div id="exampleRepositories"
+                 class="mt-0">
+                <p class="opacity-70 ">Try: 2 tabs open(scary!) 1. Wokwi Experimental Viewer  2.ESPHome YAML file.</p>
 
-                    <div class="flex flex-wrap gap-2 mt-10" x-data="{ items: [] }" x-init="items = await (await fetch('/esphome-wokwi/index.json')).json()">
+                    <div class="flex flex-wrap gap-2 mt-10" x-data="{ items: [] }" x-init="items = await (await fetch('/index.json')).json()">
                         <template x-for="item in items" :key="item.name">
                             <button x-text="item.title" :data-projectname="item.name" class="px-4 py-1 bg-[#EBDBB7] hover:bg-[#FFC480] text-gray-900 rounded transition-colors duration-200 border-[3px] border-gray-900 relative hover:-translate-y-px hover:-translate-x-px">
                             </button>    
