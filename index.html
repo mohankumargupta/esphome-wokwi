@@ -133,7 +133,7 @@
           .then(data =>  {
           //console.log(data);
           const commentHeader = `# ${project}.yaml\n\n`;
-          const finalCode = commentHeader + yamlCode;
+          const finalCode = commentHeader + data;
           
         
         return codeToHtml(finalCode, {
