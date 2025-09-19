@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js Style Code Highlighting with Shiki</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #374151;
+        }
+
+        h1, h2 {
+            color: #111827;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Shiki code block styling to match Alpine.js */
+        .shiki {
+            background: #f9fafb !important;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Loading state for code blocks */
+        .code-loading {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #6b7280;
+        }
+
+        /* Inline code styling */
+        .inline-code {
+            background: #f3f4f6;
+            color: #d97706;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+            font-weight: 500;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+        }
+
+        /* Copy button styling */
+        .code-block {
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 1;
+        }
+
+        .code-block:hover .copy-button {
+            opacity: 1;
+        }
+
+        .copy-button:hover {
+            background: #4b5563;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        /* Status indicator */
+        .status {
+            padding: 0.5rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #d1fae5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alpine.js Style Code Highlighting with Shiki</h1>
+    <p>This uses Shiki (VS Code's syntax highlighter) to achieve the same minimal look as alpinejs.dev</p>
+
+    <div class="status">
+        <span id="shiki-status">Loading Shiki...</span>
+    </div>
+
+    <div class="section">
+        <h2>YAML Configuration</h2>
+        <p>Clean YAML syntax highlighting with Shiki:</p>
+        
+        <div class="code-block">
+            <pre class="code-loading" data-lang="yaml" data-code="# Application Configuration
+app:
+  name: "My Alpine App"
+  version: "1.0.0"
+  debug: true
+
+database:
+  host: localhost
+  port: 5432
+  username: admin
+  password: secret
+  ssl_mode: require
+
+features:
+  - authentication
+  - notifications
+  - analytics
+
+cache:
+  enabled: true
+  ttl: 3600
+  driver: redis
+  options:
+    prefix: "app:"
+    serialize: true
+
+logging:
+  level: info
+  channels:
+    - file
+    - console
+  file:
+    path: "/var/log/app.log"
+    max_size: "100MB"">Loading...</pre>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+        </div>
+    </div>
+
+    <!-- Load Shiki from CDN -->
+    <script type="module">
+        import { getHighlighter } from 'https://esm.sh/shiki@1.0.0';
+
+        async function initializeShiki() {
+            try {
+                // Initialize Shiki with a minimal theme similar to Alpine.js
+                const highlighter = await getHighlighter({
+                    themes: ['github-light'],
+                    langs: ['yaml']
+                });
+
+                // Update status
+                document.getElementById('shiki-status').textContent = 'Shiki loaded successfully!';
+
+                // Find all code blocks and highlight them
+                const codeBlocks = document.querySelectorAll('[data-lang]');
+                
+                codeBlocks.forEach(block => {
+                    const lang = block.getAttribute('data-lang');
+                    const code = block.getAttribute('data-code');
+                    
+                    try {
+                        const highlighted = highlighter.codeToHtml(code, {
+                            lang: lang,
+                            theme: 'github-light'
+                        });
+                        
+                        // Create a temporary div to extract just the inner content
+                        const temp = document.createElement('div');
+                        temp.innerHTML = highlighted;
+                        const shikiPre = temp.querySelector('.shiki');
+                        
+                        if (shikiPre) {
+                            // Replace the loading block with the highlighted version
+                            block.outerHTML = shikiPre.outerHTML;
+                        }
+                    } catch (error) {
+                        console.error(`Error highlighting ${lang}:`, error);
+                        block.textContent = code; // Fallback to plain text
+                        block.className = 'code-loading';
+                    }
+                });
+
+            } catch (error) {
+                console.error('Failed to load Shiki:', error);
+                document.getElementById('shiki-status').textContent = 'Failed to load Shiki. Showing plain code.';
+                document.getElementById('shiki-status').style.background = '#fef2f2';
+                document.getElementById('shiki-status').style.color = '#991b1b';
+                document.getElementById('shiki-status').style.borderColor = '#fecaca';
+                
+                // Show plain code as fallback
+                const codeBlocks = document.querySelectorAll('[data-lang]');
+                codeBlocks.forEach(block => {
+                    const code = block.getAttribute('data-code');
+                    block.textContent = code;
+                });
+            }
+        }
+
+        // Copy code functionality
+        window.copyCode = function(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent || codeBlock.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#059669';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#374151';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                button.textContent = 'Copy failed';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        };
+
+        // Initialize when page loads
+        initializeShiki();
+    </script>
+</body>
+</html>
