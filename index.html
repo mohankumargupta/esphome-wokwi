@@ -132,6 +132,10 @@
         window.open(wokwi_url, "_blank");
         console.log(project);
 
+        fetch(`https://raw.githubusercontent.com/mohankumargupta/wokwi-vscode-examples/refs/heads/main/${project}/${project}.yaml`).then((data) => {
+          console.log(data);
+        });
+
       }  
 
     </script>
