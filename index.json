@@ -5,8 +5,8 @@
         "description": "ESP32 hello world with ESPHome"
     },
     {
-        "name": "pictureframe",
-        "title": "Picture Frame",
+        "name": "ili9341",
+        "title": "TFT Demo",
         "description": "ESPHome on ILI9431 display"
     }
 ]
