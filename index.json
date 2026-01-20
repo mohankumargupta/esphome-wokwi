@@ -8,5 +8,10 @@
         "name": "ili9341",
         "title": "TFT Demo",
         "description": "ESPHome on ILI9431 display"
-    }
+    },
+    {
+        "name": "gifesp32c3",
+        "title": "GIF on esp32c3",
+        "description": "GIF esp32c3 memory limitations"
+    }    
 ]
