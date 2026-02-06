@@ -13,5 +13,10 @@
         "name": "gifesp32c3",
         "title": "GIF on esp32c3",
         "description": "GIF esp32c3 memory limitations"
-    }    
+    },
+    {
+        "name": "gifesp32c3lvgl",
+        "title": "GIF using LVGL",
+        "description": "GIF on LVGL"
+    }          
 ]
